@@ -1,5 +1,3 @@
-// noinspection D
-
 import { useChat } from './useChat';
 import { getAnswer } from './useApi.ts';
 

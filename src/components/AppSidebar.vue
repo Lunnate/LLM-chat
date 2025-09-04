@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useChat } from "../composables/useChat.ts";
+import { useChat } from '../composables/useChat.ts';
 const { createNewChat, chats, currentChat } = useChat();
 </script>
 
