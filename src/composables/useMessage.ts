@@ -1,6 +1,5 @@
 import { useChat } from './useChat';
 import { getAnswer } from '../api/useApi.ts';
-
 export const useMessage = () => {
   const { message, currentChat, createNewChat, chats } = useChat();
 
@@ -30,7 +29,7 @@ export const useMessage = () => {
           currentChat.value.messages[lastIndex].content = aiMessage;
         }
       }
-      localStorage.setItem('chats', JSON.stringify(chats.value));
+      localStorage.setItem('chats', JSON.stringify(chats.value))
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.log('Error: ', error.message);
