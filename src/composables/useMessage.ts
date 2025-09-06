@@ -1,5 +1,5 @@
 import { useChat } from './useChat';
-import { getAnswer } from './useApi.ts';
+import { getAnswer } from '../api/useApi.ts';
 
 export const useMessage = () => {
   const { message, currentChat, createNewChat, chats } = useChat();

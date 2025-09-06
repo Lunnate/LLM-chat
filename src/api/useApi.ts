@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Chat } from '../types/Chat';
+import type { Chat } from '../types/Chat.ts';
 
 const API_KEY: string = import.meta.env.VITE_OPENROUTER_API_KEY;
 
@@ -28,7 +28,6 @@ export async function getAnswer(currentChat: Chat): Promise<string> {
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.log('Error: ', error.message);
-      throw new Error('Произошла ошибка при получении ответа');
     }
     throw new Error('Произошла ошибка при получении ответа');
   }

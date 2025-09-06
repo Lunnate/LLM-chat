@@ -28,14 +28,14 @@ const { currentChat } = useChat();
           >
             <div v-if="message.role === 'user'" class="flex justify-end">
               <p
-                class="p-2 rounded-2xl rounded-br-md bg-blue-600 text-white mb-4 shadow-sm"
+                class="p-2 rounded-2xl rounded-br-md bg-blue-600 text-white mb-4 shadow-sm max-w-[40%]"
               >
                 {{ message.content }}
               </p>
             </div>
             <div v-else class="flex justify-start">
               <p
-                class="mb-4 p-2 rounded-2xl rounded-bl-md bg-neutral-800 text-white shadow-sm"
+                class="mb-4 p-2 rounded-2xl rounded-bl-md bg-neutral-800 text-white shadow-sm max-w-[45%]"
               >
                 {{ message.content }}
               </p>
