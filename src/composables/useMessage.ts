@@ -8,9 +8,9 @@ import hljs from "highlight.js";
 import "highlight.js/styles/panda-syntax-dark.css"
 
 const renderer = new marked.Renderer();
-renderer.code = ({ text, lang }: { text: string; lang?: string; escaped?: boolean }) => {
-  const language = lang && hljs.getLanguage(lang) ? lang : "plaintext";
-  const highlighted = hljs.highlight(text, { language }).value;
+renderer.code = ({ text, lang }: { text: string; lang?: string; escaped?: boolean }): string => {
+  const language: string = lang && hljs.getLanguage(lang) ? lang : "plaintext";
+  const highlighted: string = hljs.highlight(text, { language }).value;
   return `<pre><code class="hljs ${language}">${highlighted}</code></pre>`;
 };
 
@@ -46,6 +46,7 @@ export const useMessage = () => {
       content: UI_MESSAGES.PENDING_MESSAGE,
     })
 
+
     try {
       const aiMessage: string = await getAnswer(currentChat.value);
       if (currentChat.value?.messages) {
@@ -65,6 +66,7 @@ export const useMessage = () => {
             currentChat.value.messages[lastIndex].content =
               UI_MESSAGES.ERROR;
             isLoading.value = false;
+            localStorage.setItem(STORAGE_KEYS.CHATS, JSON.stringify(chats.value))
           }
         }
       }

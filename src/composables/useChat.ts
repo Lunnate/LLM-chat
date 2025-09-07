@@ -8,9 +8,17 @@ const chats = ref<Chat[]>([]);
 const currentChat = ref<Chat | null>(null);
 
 function loadChats(): void {
+
   const savedChats = localStorage.getItem(STORAGE_KEYS.CHATS);
   if (savedChats) {
     chats.value = JSON.parse(savedChats);
+  }
+}
+
+function loadChatFromUrl(chatId: string): void {
+  const foundChat = chats.value.find(chat => chat.id === chatId)
+  if (foundChat) {
+    currentChat.value = foundChat;
   }
 }
 
@@ -40,6 +48,7 @@ export const useChat = () => {
     currentChat,
     createNewChat,
     deleteChat,
+    loadChatFromUrl
   };
 };
 

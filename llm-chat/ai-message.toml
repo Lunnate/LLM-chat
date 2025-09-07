@@ -1,0 +1,5 @@
+[meta]
+name = "AI-message"
+
+[config]
+method = "GET"

@@ -6,8 +6,8 @@ const { chats, currentChat, deleteChat } = useChat();
 <template>
   <aside class="flex flex-col w-72 overflow-y-auto bg-neutral-800">
     <div class="p-4">
-      <a
-        href="/"
+      <router-link
+        to="/"
         class="flex items-center gap-2 w-full hover:bg-neutral-700 text-white font-semibold py-2 px-2 rounded-lg transition-colors duration-200 cursor-pointer"
         @click="currentChat = null"
       >
@@ -24,11 +24,10 @@ const { chats, currentChat, deleteChat } = useChat();
           ></path>
         </svg>
         <span>Новый чат</span>
-      </a>
+      </router-link>
     </div>
     <nav class="flex flex-1 flex-col p-4">
-      <router-link
-        to="/chat/:id"
+      <div
         class="hover:bg-neutral-700 rounded-lg p-2"
         v-for="(chat, index) in chats"
         :key="index"
@@ -39,7 +38,7 @@ const { chats, currentChat, deleteChat } = useChat();
           <span>{{ chat.title }}</span>
           <div
             class="cursor-pointer"
-            @click="deleteChat(chat.id)"
+            @click.stop="deleteChat(chat.id)"
           >
             <svg
               width="18px"
@@ -58,7 +57,7 @@ const { chats, currentChat, deleteChat } = useChat();
             </svg>
           </div>
         </div>
-      </router-link>
+      </div>
     </nav>
     <div class="p-4">
       <a

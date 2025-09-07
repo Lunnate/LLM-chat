@@ -1,10 +1,20 @@
 <script setup lang="ts">
+import { useRoute } from "vue-router";
 import AppInput from "../components/AppInput.vue";
 import { useChat } from "../composables/useChat.ts";
 import { useMessage } from "../composables/useMessage.ts";
+import { onMounted } from "vue";
 
-const { currentChat } = useChat();
+const { currentChat, loadChatFromUrl } = useChat();
 const { formatMessage } = useMessage();
+const route = useRoute();
+
+onMounted(() => {
+  const chatId = route.params.id;
+  if (chatId) {
+    loadChatFromUrl(chatId as string)
+  }
+});
 
 </script>
 
