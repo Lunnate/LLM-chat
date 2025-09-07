@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import AppSidebar from "./components/AppSidebar.vue";
-import AppInput from "./components/AppInput.vue";
 import { useChat } from "./composables/useChat.ts";
 import { watch } from "vue";
+
+import AppSidebar from "./components/AppSidebar.vue";
+import AppInput from "./components/AppInput.vue";
 import router from "./router";
 import ChatPage from "./pages/ChatPage.vue";
 
 const { currentChat } = useChat();
-
 watch(currentChat, () => {
   if (currentChat.value) {
     router.push(`/chat/${currentChat.value.id}`);

@@ -25,8 +25,8 @@ function createNewChat(): void {
 
 function deleteChat(chatId: string): void {
   chats.value = chats.value.filter((chat) => chat.id !== chatId);
-  localStorage.setItem('chats', JSON.stringify(chats.value))
   currentChat.value = null;
+  localStorage.setItem('chats', JSON.stringify(chats.value))
 }
 
 loadChats();

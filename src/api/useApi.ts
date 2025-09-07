@@ -1,16 +1,17 @@
 import axios from 'axios';
 import type { Chat } from '../types/Chat.ts';
+import { API_CONFIG, UI_MESSAGES } from '../utils/constants.ts';
 
 const API_KEY: string = import.meta.env.VITE_OPENROUTER_API_KEY;
 
 export async function getAnswer(currentChat: Chat): Promise<string> {
   try {
     const response = await axios.post(
-      'https://openrouter.ai/api/v1/chat/completions',
+      API_CONFIG.BASE_URL,
       {
-        model: 'deepseek/deepseek-chat-v3.1:free',
+        model: API_CONFIG.MODEL,
         messages: currentChat.messages
-          ?.filter((message) => message.content !== 'Печатает...')
+          ?.filter((message) => message.content !== UI_MESSAGES.PENDING_MESSAGE)
           ?.map((message) => ({
             role: message.role,
             content: message.content,
@@ -20,7 +21,7 @@ export async function getAnswer(currentChat: Chat): Promise<string> {
         headers: {
           Authorization: `Bearer ${API_KEY}`,
           "Content-Type": 'application/json',
-          "HTTP-Referer": 'http://localhost:5173/',
+          "HTTP-Referer": API_CONFIG.REFERER,
         },
       },
     );
@@ -29,6 +30,6 @@ export async function getAnswer(currentChat: Chat): Promise<string> {
     if (error instanceof Error) {
       console.log('Error: ', error.message);
     }
-    throw new Error('Произошла ошибка при получении ответа');
+    throw new Error(UI_MESSAGES.ERROR);
   }
 }
