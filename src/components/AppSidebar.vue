@@ -36,7 +36,8 @@ const { chats, currentChat, deleteChat } = useChat();
       >
         <div class="flex justify-between items-center">
           <span>{{ chat.title }}</span>
-          <div
+          <router-link
+            to="/"
             class="cursor-pointer"
             @click.stop="deleteChat(chat.id)"
           >
@@ -55,7 +56,7 @@ const { chats, currentChat, deleteChat } = useChat();
                 stroke-linejoin="round"
               />
             </svg>
-          </div>
+          </router-link>
         </div>
       </div>
     </nav>
