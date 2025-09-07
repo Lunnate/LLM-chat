@@ -1,31 +1,33 @@
 <script setup lang="ts">
 import AppInput from "../components/AppInput.vue";
 import { useChat } from "../composables/useChat.ts";
+import { useMessage } from "../composables/useMessage.ts";
 
 const { currentChat } = useChat();
+const { formatMessage } = useMessage();
 
 </script>
 
 <template>
-  <div class="p-6 overflow-y-auto" v-if="currentChat">
+  <div class="h-full p-6 overflow-y-auto" v-if="currentChat">
     <div
       class="flex flex-col"
       v-for="(message, id) in currentChat.messages"
       :key="id"
     >
       <div v-if="message.role === 'user'" class="flex justify-end">
-        <p
+        <div
           class="p-2 rounded-2xl rounded-br-md bg-blue-600 text-white mb-4 shadow-sm max-w-[40%]"
+          v-html="formatMessage(message.content)"
         >
-          {{ message.content }}
-        </p>
+        </div>
       </div>
       <div v-else class="flex justify-start">
-        <p
+        <div
           class="mb-4 p-2 rounded-2xl rounded-bl-md bg-neutral-800 text-white shadow-sm max-w-[45%]"
+          v-html="formatMessage(message.content)"
         >
-          {{ message.content }}
-        </p>
+        </div>
       </div>
     </div>
   </div>

@@ -1,6 +1,7 @@
 import { ref } from "vue";
 import type { Chat } from '../types/Chat';
 import { STORAGE_KEYS } from "../utils/constants.ts";
+import { v4 as uuidv6 } from 'uuid';
 
 const message = ref<string>('');
 const chats = ref<Chat[]>([]);
@@ -15,7 +16,7 @@ function loadChats(): void {
 
 function createNewChat(): void {
   const newChat: Chat = {
-    id: Date.now().toString(),
+    id: uuidv6(),
     title: message.value.slice(0, 20),
     messages: [],
   };
@@ -38,7 +39,7 @@ export const useChat = () => {
     chats,
     currentChat,
     createNewChat,
-    deleteChat
+    deleteChat,
   };
 };
 

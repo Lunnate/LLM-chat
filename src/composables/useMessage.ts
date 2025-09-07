@@ -3,8 +3,26 @@ import { getAnswer } from '../api/useApi.ts';
 import { UI_MESSAGES, STORAGE_KEYS   } from '../utils/constants.ts';
 import { validateMessage } from '../utils/validation.ts';
 import { ref } from "vue";
+import { marked } from "marked";
+import hljs from "highlight.js";
+import "highlight.js/styles/panda-syntax-dark.css"
 
+const renderer = new marked.Renderer();
+renderer.code = ({ text, lang }: { text: string; lang?: string; escaped?: boolean }) => {
+  const language = lang && hljs.getLanguage(lang) ? lang : "plaintext";
+  const highlighted = hljs.highlight(text, { language }).value;
+  return `<pre><code class="hljs ${language}">${highlighted}</code></pre>`;
+};
+
+marked.setOptions({
+  renderer,
+  gfm: true,
+  breaks: true,
+});
 export const useMessage = () => {
+  function formatMessage(text: string) {
+    return marked(text)
+  }
   const isLoading = ref<boolean>(false);
   const { message, currentChat, createNewChat, chats } = useChat()
 
@@ -55,6 +73,7 @@ export const useMessage = () => {
 
   return {
     sendMessage,
-    isLoading
+    isLoading,
+    formatMessage
   };
 };
