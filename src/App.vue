@@ -18,7 +18,7 @@ watch(currentChat, () => {
 <template>
   <div class="flex h-screen overflow-hidden bg-neutral-900">
     <AppSidebar />
-    <div class="flex flex-col justify-center items-center m-auto" v-if="!currentChat">
+    <div v-if="!currentChat" class="flex flex-col justify-center items-center m-auto" >
       <main class="mb-4">
         <h1
           class="text-2xl p-4 text-center font-bold from-blue-300 to-blue-600 bg-gradient-to-r bg-clip-text text-transparent"

@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { ref } from "vue";
 import type { Chat } from '../types/Chat';
 
 const message = ref<string>('');
@@ -15,7 +15,7 @@ function loadChats(): void {
 function createNewChat(): void {
   const newChat: Chat = {
     id: Date.now().toString(),
-    title: message.value ? message.value.slice(0, 10) : 'Новый чат',
+    title: message.value.slice(0, 20),
     messages: [],
   };
   chats.value.push(newChat);
@@ -26,6 +26,7 @@ function createNewChat(): void {
 function deleteChat(chatId: string): void {
   chats.value = chats.value.filter((chat) => chat.id !== chatId);
   localStorage.setItem('chats', JSON.stringify(chats.value))
+  currentChat.value = null;
 }
 
 loadChats();
@@ -35,7 +36,6 @@ export const useChat = () => {
     message,
     chats,
     currentChat,
-    loadChats,
     createNewChat,
     deleteChat
   };
