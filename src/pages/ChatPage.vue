@@ -7,7 +7,7 @@ const { currentChat } = useChat();
 </script>
 
 <template>
-  <div class="w-full h-full p-4" v-if="currentChat">
+  <div class="p-6 overflow-y-auto" v-if="currentChat">
     <div
       class="flex flex-col"
       v-for="(message, id) in currentChat.messages"

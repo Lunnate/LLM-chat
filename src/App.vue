@@ -16,7 +16,7 @@ watch(currentChat, () => {
 </script>
 
 <template>
-  <div class="flex h-screen overflow-hidden bg-neutral-900">
+  <div class="flex w-full h-screen overflow-hidden bg-neutral-900">
     <AppSidebar />
     <div v-if="!currentChat" class="flex flex-col justify-center items-center m-auto" >
       <main class="mb-4">

@@ -4,7 +4,7 @@ import { useMessage } from "../composables/useMessage.ts";
 import { nextTick, ref, watch } from "vue";
 
 const { message } = useChat();
-const { sendMessage } = useMessage();
+const { sendMessage, isLoading } = useMessage();
 
 const textAreaHeight = ref<HTMLTextAreaElement | null>(null);
 function updateTextAreaHeight(): void {
@@ -12,6 +12,13 @@ function updateTextAreaHeight(): void {
     textAreaHeight.value.style.height = "auto";
     textAreaHeight.value.style.height =
       textAreaHeight.value.scrollHeight + "px";
+  }
+}
+
+function handleEnterSubmit(event: KeyboardEvent) {
+  if (event.key === 'Enter' && !event.shiftKey && !isLoading.value ) {
+    sendMessage()
+    event.preventDefault()
   }
 }
 
@@ -24,7 +31,7 @@ watch(message, () => {
 
 <template>
   <div class="relative pl-6 px-6 pb-4">
-    <form @keydown.enter="sendMessage">
+    <form @keydown="handleEnterSubmit">
       <textarea
         ref="textAreaHeight"
         v-model="message"
@@ -35,7 +42,7 @@ watch(message, () => {
       <button
         class="absolute text-white right-12 top-3 cursor-pointer disabled:opacity-50"
         @click="sendMessage"
-        :disabled="message.length === 0"
+        :disabled="isLoading"
       >
         Отправить
       </button>

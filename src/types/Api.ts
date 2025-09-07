@@ -5,7 +5,7 @@ export interface APIResponse {
   object: string,
   created: number,
   choices: APIChoice[],
-  usage: APIUsage[]
+  usage: APIUsage
 }
 
 export interface APIChoice {
@@ -17,7 +17,7 @@ export interface APIChoice {
 }
 
 export interface APIMessage {
-  role: string,
+  role: 'user' | 'assistant',
   content: string,
   refusal: string | null,
   reasoning: string | null
