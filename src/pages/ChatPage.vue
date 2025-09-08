@@ -39,7 +39,7 @@ onMounted(() => {
     </div>
   </div>
 
-  <div class="p-4 md:p-6 w-full max-w-4xl mx-auto">
+  <div class="p-4 md:p-6  max-w-4xl mx-auto">
     <AppInput />
     <p class="text-center pb-2">
       LLM может ошибаться. Проверяйте важную информацию.

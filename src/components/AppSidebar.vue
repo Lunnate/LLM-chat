@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { useChat } from "../composables/useChat.ts";
-import { ref } from "vue";
-const { chats, currentChat, deleteChat, updateChatTitle } = useChat();
-const newChatTitle = ref("");
+const { chats, currentChat, deleteChat } = useChat();
 </script>
 
 <template>
