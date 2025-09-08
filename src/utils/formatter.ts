@@ -1,13 +1,19 @@
 import { marked } from "marked";
 import hljs from "highlight.js";
-import "highlight.js/styles/panda-syntax-dark.css"
+import "highlight.js/styles/panda-syntax-dark.css";
 
 export function formatMessage(text: string) {
-
-
   const renderer = new marked.Renderer();
-  renderer.code = ({ text, lang }: { text: string; lang?: string; escaped?: boolean }): string => {
-    const language: string = lang && hljs.getLanguage(lang) ? lang : "plaintext";
+  renderer.code = ({
+    text,
+    lang,
+  }: {
+    text: string;
+    lang?: string;
+    escaped?: boolean;
+  }): string => {
+    const language: string =
+      lang && hljs.getLanguage(lang) ? lang : "plaintext";
     const highlighted: string = hljs.highlight(text, { language }).value;
     return `<pre><code class="hljs ${language}">${highlighted}</code></pre>`;
   };
@@ -18,5 +24,5 @@ export function formatMessage(text: string) {
     breaks: true,
   });
 
-  return marked(text)
+  return marked(text);
 }

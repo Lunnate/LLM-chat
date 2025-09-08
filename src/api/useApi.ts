@@ -1,6 +1,6 @@
-import axios from 'axios';
-import type { Chat } from '../types/Chat.ts';
-import { API_CONFIG, UI_MESSAGES } from '../utils/constants.ts';
+import axios from "axios";
+import type { Chat } from "../types/Chat.ts";
+import { API_CONFIG, UI_MESSAGES } from "../utils/constants.ts";
 
 const API_KEY: string = import.meta.env.VITE_OPENROUTER_API_KEY;
 
@@ -20,7 +20,7 @@ export async function getAnswer(currentChat: Chat): Promise<string> {
       {
         headers: {
           Authorization: `Bearer ${API_KEY}`,
-          "Content-Type": 'application/json',
+          "Content-Type": "application/json",
           "HTTP-Referer": API_CONFIG.REFERER,
         },
       },
@@ -28,7 +28,7 @@ export async function getAnswer(currentChat: Chat): Promise<string> {
     return response.data.choices[0].message.content;
   } catch (error: unknown) {
     if (error instanceof Error) {
-      console.log('Error: ', error.message);
+      console.log("Error: ", error.message);
     }
     throw new Error(UI_MESSAGES.ERROR);
   }

@@ -37,9 +37,9 @@ function addMessageToChat(
   message: Message["content"],
 ): void {
   if (!currentChat.value) {
-    createNewChat()
+    createNewChat();
   }
-  if (!currentChat.value) return
+  if (!currentChat.value) return;
   currentChat.value.messages.push({
     role,
     content: message,
@@ -47,11 +47,16 @@ function addMessageToChat(
   localStorage.setItem(STORAGE_KEYS.CHATS, JSON.stringify(chats.value));
 }
 
-function updateLastMessage(message: Message['content']): void {
-  if (!currentChat.value) return
+function updateLastMessage(message: Message["content"]): void {
+  if (!currentChat.value) return;
   const lastIndex: number = currentChat.value.messages.length - 1;
   currentChat.value.messages[lastIndex].content = message;
-  localStorage.setItem(STORAGE_KEYS.CHATS, JSON.stringify(chats.value))
+  localStorage.setItem(STORAGE_KEYS.CHATS, JSON.stringify(chats.value));
+}
+
+function updateChatTitle(title: string): void {
+  if (!currentChat.value) return;
+  currentChat.value.title = title;
 }
 
 function deleteChat(chatId: string): void {
@@ -70,6 +75,7 @@ export const useChat = () => {
     deleteChat,
     loadChatFromUrl,
     addMessageToChat,
-    updateLastMessage
+    updateLastMessage,
+    updateChatTitle
   };
 };

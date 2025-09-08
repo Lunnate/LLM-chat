@@ -12,8 +12,6 @@ watch(currentChat, () => {
     router.push(`/chat/${currentChat.value.id}`);
   }
 });
-
-
 </script>
 
 <template>

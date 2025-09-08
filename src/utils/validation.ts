@@ -1,3 +1,3 @@
 export function validateMessage(value: string): boolean {
-  return value.trim() !== '' && value.length !== 0;
+  return value.trim() !== "" && value.length !== 0;
 }

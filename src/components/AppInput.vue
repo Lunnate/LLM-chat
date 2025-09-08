@@ -16,9 +16,9 @@ function updateTextAreaHeight(): void {
 }
 
 function handleEnterSubmit(event: KeyboardEvent) {
-  if (event.key === 'Enter' && !event.shiftKey && !isLoading.value ) {
-    sendMessage()
-    event.preventDefault()
+  if (event.key === "Enter" && !event.shiftKey && !isLoading.value) {
+    sendMessage();
+    event.preventDefault();
   }
 }
 
