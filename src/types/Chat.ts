@@ -1,7 +1,7 @@
 export interface Chat {
   id: string;
   title: string;
-  messages?: Message[];
+  messages: Message[];
 }
 
 export interface Message {
