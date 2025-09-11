@@ -15,7 +15,7 @@ export function formatMessage(text: string) {
     const language: string =
       lang && hljs.getLanguage(lang) ? lang : "plaintext";
     const highlighted: string = hljs.highlight(text, { language }).value;
-    return `<pre><code  class="hljs">${lang} <br />${highlighted}</code></pre>`;
+    return `<pre><code class="hljs">${lang}<br />${highlighted}</code></pre>`;
   };
 
   marked.setOptions({

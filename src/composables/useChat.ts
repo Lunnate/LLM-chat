@@ -6,6 +6,7 @@ import { v4 as uuidv6 } from "uuid";
 const message = ref<string>("");
 const chats = ref<Chat[]>([]);
 const currentChat = ref<Chat | null>(null);
+const editingChatId  = ref<string | null>(null)
 
 function loadChats(): void {
   const savedChats = localStorage.getItem(STORAGE_KEYS.CHATS);
@@ -15,7 +16,7 @@ function loadChats(): void {
 }
 
 function loadChatFromUrl(chatId: string): void {
-  const foundChat = chats.value.find((chat) => chat.id === chatId);
+  const foundChat = chats.value.find((chat): boolean => chat.id === chatId);
   if (foundChat) {
     currentChat.value = foundChat;
   }
@@ -55,9 +56,19 @@ function updateLastMessage(message: Message["content"]): void {
 }
 
 function deleteChat(chatId: string): void {
-  chats.value = chats.value.filter((chat) => chat.id !== chatId);
+  chats.value = chats.value.filter((chat): boolean => chat.id !== chatId);
   currentChat.value = null;
   localStorage.setItem(STORAGE_KEYS.CHATS, JSON.stringify(chats.value));
+}
+
+function updateChatTitle(chatId: string, title: string): void {
+  const chat = chats.value.find((chat): boolean => chat.id === chatId);
+
+  if (chat) {
+    chat.title = title;
+    editingChatId.value = null;
+    localStorage.setItem(STORAGE_KEYS.CHATS, JSON.stringify(chats.value));
+  }
 }
 
 loadChats();
@@ -71,5 +82,7 @@ export const useChat = () => {
     loadChatFromUrl,
     addMessageToChat,
     updateLastMessage,
+    updateChatTitle,
+    editingChatId
   };
 };
