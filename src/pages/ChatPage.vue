@@ -18,7 +18,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="h-full p-6 overflow-y-auto" v-if="currentChat">
+  <div class="h-screen p-6 overflow-y-auto" v-if="currentChat">
     <div
       class="flex flex-col"
       v-for="(message, id) in currentChat.messages"
