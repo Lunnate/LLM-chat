@@ -24,7 +24,7 @@ onMounted(() => {
       v-for="(message, id) in currentChat.messages"
       :key="id"
     >
-      <div v-if="message.role === 'user'" class="flex justify-end">
+      <div v-if="message.role === 'user'" class="flex justify-end break-all">
         <div
           class="p-2 rounded-2xl rounded-br-md bg-blue-600 text-white mb-4 shadow-sm max-w-[40%]"
           v-html="formatMessage(message.content)"
