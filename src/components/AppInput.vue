@@ -35,7 +35,7 @@ watch(message, () => {
       <textarea
         ref="textAreaHeight"
         v-model="message"
-        class="w-[756px] bg-neutral-800 focus:outline-none py-4 px-4 rounded-lg resize-none transition-all duration-300 overflow-y-auto"
+        class="max-h-[1000px] w-[756px] bg-neutral-800 focus:outline-none py-4 px-4 rounded-lg resize-none transition-all duration-300 overflow-y-auto"
         placeholder="Введите сообщение..."
         rows="1"
       />
