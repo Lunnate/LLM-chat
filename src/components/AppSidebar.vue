@@ -47,6 +47,8 @@ const titleInput = ref("");
           />
           <div class="flex items-center gap-2">
             <svg
+              v-if="editingChatId !== chat.id"
+              @click="editingChatId = chat.id; titleInput = chat.title"
               width="18px"
               height="18px"
               viewBox="0 0 24 24"
