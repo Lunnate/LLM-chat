@@ -54,11 +54,6 @@ function updateLastMessage(message: Message["content"]): void {
   localStorage.setItem(STORAGE_KEYS.CHATS, JSON.stringify(chats.value));
 }
 
-function updateChatTitle(title: string): void {
-  if (!currentChat.value) return;
-  currentChat.value.title = title;
-}
-
 function deleteChat(chatId: string): void {
   chats.value = chats.value.filter((chat) => chat.id !== chatId);
   currentChat.value = null;
@@ -76,6 +71,5 @@ export const useChat = () => {
     loadChatFromUrl,
     addMessageToChat,
     updateLastMessage,
-    updateChatTitle
   };
 };

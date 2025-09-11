@@ -35,12 +35,12 @@ watch(message, () => {
       <textarea
         ref="textAreaHeight"
         v-model="message"
-        class="w-[756px] h-[56px] bg-neutral-800 focus:outline-none py-4 pl-4 rounded-lg resize-none transition-all duration-300 overflow-y-auto"
+        class="w-[756px] bg-neutral-800 focus:outline-none py-4 pl-4 rounded-lg resize-none transition-all duration-300 overflow-y-auto"
         placeholder="Введите сообщение..."
         rows="1"
       />
       <button
-        class="absolute right-8 top-2.5 rounded-full bg-blue-600 w-[36px] h-[36px] flex items-center justify-center disabled:opacity-50 cursor-pointer"
+        class="absolute right-8 bottom-8 rounded-full bg-blue-600 w-[30px] h-[30px] flex items-center justify-center disabled:opacity-50 cursor-pointer"
         :disabled="isLoading"
         @click="sendMessage"
       >
