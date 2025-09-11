@@ -65,7 +65,7 @@ function updateChatTitle(chatId: string, title: string): void {
   const chat = chats.value.find((chat): boolean => chat.id === chatId);
 
   if (chat) {
-    chat.title = title;
+    chat.title = title.slice(0, 19) + `...`;
     editingChatId.value = null;
     localStorage.setItem(STORAGE_KEYS.CHATS, JSON.stringify(chats.value));
   }
