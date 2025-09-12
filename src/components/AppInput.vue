@@ -35,21 +35,32 @@ watch(message, () => {
       <textarea
         ref="textAreaHeight"
         v-model="message"
-        class="max-h-[1000px] w-[756px] bg-neutral-800 focus:outline-none py-4 px-4 rounded-lg resize-none transition-all duration-300 overflow-y-auto"
+        class="max-h-[1000px] w-[756px] bg-neutral-800 focus:outline-none py-4 px-8 rounded-lg resize-none transition-all duration-300 overflow-y-auto"
         placeholder="Введите сообщение..."
         rows="1"
       />
+      <button class="absolute left-7 top-4 cursor-pointer" @click.prevent>
+        <svg width="24px" height="24px" viewBox="0 0 20 20" fill="none">
+          <path
+            d="M5 11C4.44772 11 4 10.5523 4 10C4 9.44772 4.44772 9 5 9H15C15.5523 9 16 9.44772 16 10C16 10.5523 15.5523 11 15 11H5Z"
+            fill="#808080"
+          />
+          <path
+            d="M9 5C9 4.44772 9.44772 4 10 4C10.5523 4 11 4.44772 11 5V15C11 15.5523 10.5523 16 10 16C9.44772 16 9 15.5523 9 15V5Z"
+            fill="#808080"
+          />
+        </svg>
+      </button>
       <button
         class="absolute right-7 bottom-8.5 rounded-full bg-blue-600 w-[30px] h-[30px] flex items-center justify-center disabled:opacity-50 cursor-pointer"
-        :disabled="isLoading"
+        :disabled="isLoading || message.length === 0"
         @click="sendMessage"
       >
         <svg
-          width="24px"
-          height="24px"
+          width="20px"
+          height="20px"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
           class="rotate-90"
         >
           <path

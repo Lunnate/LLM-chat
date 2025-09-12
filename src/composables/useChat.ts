@@ -6,7 +6,7 @@ import { v4 as uuidv6 } from "uuid";
 const message = ref<string>("");
 const chats = ref<Chat[]>([]);
 const currentChat = ref<Chat | null>(null);
-const editingChatId  = ref<string | null>(null)
+const editingChatId = ref<string | null>(null);
 
 function loadChats(): void {
   const savedChats = localStorage.getItem(STORAGE_KEYS.CHATS);
@@ -65,7 +65,7 @@ function updateChatTitle(chatId: string, title: string): void {
   const chat = chats.value.find((chat): boolean => chat.id === chatId);
 
   if (chat) {
-    chat.title = title.slice(0, 17) + `...`;
+    chat.title = title.length > 20 ? title.slice(0, 17) + `...` : title;
     editingChatId.value = null;
     localStorage.setItem(STORAGE_KEYS.CHATS, JSON.stringify(chats.value));
   }
@@ -83,6 +83,6 @@ export const useChat = () => {
     addMessageToChat,
     updateLastMessage,
     updateChatTitle,
-    editingChatId
+    editingChatId,
   };
 };

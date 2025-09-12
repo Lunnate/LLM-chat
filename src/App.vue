@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useChat } from "./composables/useChat.ts";
 import { watch } from "vue";
+import { useChat } from "./composables/useChat.ts";
 
 import AppSidebar from "./components/AppSidebar.vue";
 import router from "./router";
