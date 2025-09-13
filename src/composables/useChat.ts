@@ -71,6 +71,7 @@ function updateChatTitle(chatId: string, title: string): void {
   }
 }
 
+
 loadChats();
 
 export const useChat = () => {

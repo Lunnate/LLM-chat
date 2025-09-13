@@ -8,12 +8,12 @@ const titleInput = ref("");
 
 <template>
   <aside
-    class="flex flex-col w-72 overflow-y-auto bg-neutral-800 overflow-hidden"
+    class="flex flex-col w-72 overflow-y-auto bg-neutral-800 overflow-hidden rounded-br-xl"
   >
     <div class="p-4">
       <router-link
         to="/"
-        class="flex items-center gap-2 w-full hover:bg-neutral-700 text-white font-semibold py-2 px-2 rounded-lg transition-colors duration-200 cursor-pointer"
+        class="flex items-center gap-2 w-full hover:bg-neutral-700 text-white font-semibold py-2 px-2 rounded-lg transition-colors duration-200 cursor-pointer bg-black justify-center"
         @click="currentChat = null"
       >
         <img src="../assets/icons/newChatIcon.svg" />

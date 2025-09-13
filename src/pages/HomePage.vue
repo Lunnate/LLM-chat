@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppInput from "../components/AppInput.vue";
+import AppTextarea from "../components/AppTextarea.vue";
 </script>
 
 <template>
@@ -11,7 +11,7 @@ import AppInput from "../components/AppInput.vue";
         Чем я могу помочь сегодня?
       </h1>
       <div class="mt-4">
-        <AppInput />
+        <AppTextarea />
       </div>
     </div>
   </div>
