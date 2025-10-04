@@ -2,8 +2,8 @@
 import { watch } from "vue";
 import { useChat } from "./composables/useChat.ts";
 
-import AppSidebar from "./components/AppSidebar.vue";
 import router from "./router";
+import AppSidebar from "./components/AppSidebar.vue";
 
 const { currentChat } = useChat();
 
@@ -16,7 +16,7 @@ watch(currentChat, () => {
 
 <template>
   <div class="flex h-screen overflow-hidden bg-neutral-900">
-    <AppSidebar />
+    <AppSidebar v-if="!$route.meta.hideSidebar" />
     <div class="w-screen flex flex-col">
       <router-view />
     </div>

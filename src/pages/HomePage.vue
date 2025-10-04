@@ -1,8 +1,24 @@
 <script setup lang="ts">
-import AppInput from "../components/AppInput.vue";
+import AppTextarea from "../components/AppTextarea.vue";
+import AppButton from "../components/ui/AppButton.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 </script>
 
 <template>
+  <div class="flex gap-2 justify-end mt-4 mr-2">
+    <AppButton
+      text="Войти"
+      class="bg-white text-black"
+      @click="router.push('/sign-in')"
+    />
+    <AppButton
+      text="Зарегистрироваться"
+      class="border-1 border-neutral-700"
+      @click="router.push('/sign-up')"
+    />
+  </div>
   <div class="m-auto">
     <div class="mb-4">
       <h1
@@ -11,7 +27,7 @@ import AppInput from "../components/AppInput.vue";
         Чем я могу помочь сегодня?
       </h1>
       <div class="mt-4">
-        <AppInput />
+        <AppTextarea />
       </div>
     </div>
   </div>

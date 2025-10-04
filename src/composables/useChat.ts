@@ -2,6 +2,7 @@ import { ref } from "vue";
 import type { Chat, Message } from "../types/Chat";
 import { STORAGE_KEYS } from "../utils/constants.ts";
 import { v4 as uuidv6 } from "uuid";
+import { validateTitle } from "../utils/validation.ts";
 
 const message = ref<string>("");
 const chats = ref<Chat[]>([]);
@@ -25,10 +26,10 @@ function loadChatFromUrl(chatId: string): void {
 function createNewChat(): void {
   const newChat: Chat = {
     id: uuidv6(),
-    title: message.value.slice(0, 20),
+    title: validateTitle(message.value),
     messages: [],
   };
-  chats.value.push(newChat);
+  chats.value.unshift(newChat);
   currentChat.value = newChat;
   localStorage.setItem(STORAGE_KEYS.CHATS, JSON.stringify(chats.value));
 }
@@ -56,13 +57,13 @@ function updateLastMessage(message: Message["content"]): void {
 }
 
 function deleteChat(chatId: string): void {
-  chats.value = chats.value.filter((chat): boolean => chat.id !== chatId);
+  chats.value = chats.value.filter((chat) => chat.id !== chatId);
   currentChat.value = null;
   localStorage.setItem(STORAGE_KEYS.CHATS, JSON.stringify(chats.value));
 }
 
 function updateChatTitle(chatId: string, title: string): void {
-  const chat = chats.value.find((chat): boolean => chat.id === chatId);
+  const chat = chats.value.find((chat) => chat.id === chatId);
 
   if (chat) {
     chat.title = title.length > 20 ? title.slice(0, 17) + `...` : title;
@@ -70,7 +71,6 @@ function updateChatTitle(chatId: string, title: string): void {
     localStorage.setItem(STORAGE_KEYS.CHATS, JSON.stringify(chats.value));
   }
 }
-
 
 loadChats();
 

@@ -13,10 +13,10 @@ const titleInput = ref("");
     <div class="p-4">
       <router-link
         to="/"
-        class="flex items-center gap-2 w-full hover:bg-neutral-700 text-white font-semibold py-2 px-2 rounded-lg transition-colors duration-200 cursor-pointer"
+        class="flex items-center gap-2 w-full hover:bg-neutral-700 text-white font-semibold py-2 px-2 rounded-lg transition-colors duration-200 cursor-pointer bg-black justify-center"
         @click="currentChat = null"
       >
-        <img src="../assets/icons/newChatIcon.svg" />
+        <img src="../assets/icons/newChatIcon.svg" alt="newChatIcon" />
         <span>Новый чат</span>
       </router-link>
     </div>
@@ -45,30 +45,19 @@ const titleInput = ref("");
                 editingChatId = chat.id;
                 titleInput = chat.title;
               "
+              alt="editChatTitleIcon"
             />
             <router-link to="/" @click.stop="deleteChat(chat.id)">
               <img
                 v-if="editingChatId !== chat.id"
                 src="../assets/icons/deleteChatIcon.svg"
+                alt="deleteChatIcon"
               />
             </router-link>
           </div>
         </div>
       </div>
     </nav>
-    <div class="p-4">
-      <a
-        href="#"
-        class="flex items-center space-x-3 hover:bg-neutral-700 p-2 rounded-md"
-      >
-        <div
-          class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center font-bold text-white"
-        >
-          A
-        </div>
-        <span class="text-sm font-medium">Alexey</span>
-      </a>
-    </div>
   </aside>
 </template>
 

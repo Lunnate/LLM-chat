@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import AppInput from "../components/AppInput.vue";
+import AppTextarea from "../components/AppTextarea.vue";
 import { useChat } from "../composables/useChat.ts";
 import { onMounted } from "vue";
 import TheMessage from "../components/ui/TheMessage.vue";
+import { formatMessage } from "../utils/formatter";
 
 const { currentChat, loadChatFromUrl } = useChat();
 
@@ -26,24 +27,38 @@ onMounted(() => {
     >
       <div v-if="message.role === 'user'" class="flex justify-end break-all">
         <div class="flex flex-col relative">
-          <TheMessage v-html="message.content" />
+          <TheMessage v-html="formatMessage(message.content)" />
           <img
             src="../assets/icons/editChatTitleIcon.svg"
             class="absolute bottom-[-12px] right-2 cursor-pointer opacity-80"
+            alt="editChatIcon"
           />
         </div>
       </div>
       <div v-else class="flex justify-start">
         <div class="flex flex-col max-w-[45%]">
-          <TheMessage v-html="message.content" />
+          <TheMessage v-html="formatMessage(message.content)" />
           <div class="flex gap-2 items-center">
-            <img src="../assets/icons/copyIcon.svg" class="cursor-pointer" />
-            <img src="../assets/icons/likeIcon.svg" class="cursor-pointer" />
+            <img
+              src="../assets/icons/copyIcon.svg"
+              class="cursor-pointer"
+              alt="copyIcon"
+            />
+            <img
+              src="../assets/icons/likeIcon.svg"
+              class="cursor-pointer"
+              alt="likeAnswerIcon"
+            />
             <img
               src="../assets/icons/likeIcon.svg"
               class="rotate-180 cursor-pointer"
+              alt="unlikeAnswerIcon"
             />
-            <img src="../assets/icons/retryIcon.svg" class="cursor-pointer" />
+            <img
+              src="../assets/icons/retryIcon.svg"
+              class="cursor-pointer"
+              alt="retryIcon"
+            />
           </div>
         </div>
       </div>
@@ -51,7 +66,7 @@ onMounted(() => {
   </div>
 
   <div class="p-4 md:p-6 max-w-4xl mx-auto">
-    <AppInput />
+    <AppTextarea />
     <p class="text-center pb-2">
       LLM может ошибаться. Проверяйте важную информацию.
     </p>

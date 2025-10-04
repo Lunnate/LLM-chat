@@ -25,6 +25,7 @@ export const useMessage = () => {
       if (error instanceof Error) {
         console.log("Error: ", error.message);
         updateLastMessage(UI_MESSAGES.ERROR);
+        isLoading.value = false;
       }
     }
   }

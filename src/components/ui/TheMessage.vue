@@ -6,6 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-const text = ref<string>("");
+const { text } = defineProps({
+  text: String,
+});
 </script>
