@@ -1,9 +1,17 @@
 <script setup lang="ts">
 import { useChat } from "../composables/useChat.ts";
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import { useAuth } from "../composables/useAuth.ts";
+const { user, signOut } = useAuth();
 const { chats, currentChat, deleteChat, updateChatTitle, editingChatId } =
   useChat();
 const titleInput = ref("");
+const firstLetter = computed(() => {
+  if (user.value?.email) {
+    return user.value.email.slice(0, 1).toUpperCase();
+  }
+  return "";
+});
 </script>
 
 <template>
@@ -58,6 +66,24 @@ const titleInput = ref("");
         </div>
       </div>
     </nav>
+    <div
+      v-if="user !== null"
+      class="flex items-center gap-2 justify-between m-2"
+    >
+      <div class="flex items-center gap-2">
+        <span
+          class="w-8 h-8 rounded-full bg-blue-700 flex items-center justify-center"
+          >{{ firstLetter }}</span
+        >
+        {{ user?.email }}
+      </div>
+      <img
+        src="../assets/icons/logout.svg"
+        alt="logout"
+        class="cursor-pointer opacity-70"
+        @click="signOut"
+      />
+    </div>
   </aside>
 </template>
 

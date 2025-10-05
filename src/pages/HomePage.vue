@@ -2,6 +2,8 @@
 import AppTextarea from "../components/AppTextarea.vue";
 import AppButton from "../components/ui/AppButton.vue";
 import { useRouter } from "vue-router";
+import { useAuth } from "../composables/useAuth.ts";
+const { user } = useAuth();
 
 const router = useRouter();
 </script>
@@ -9,11 +11,13 @@ const router = useRouter();
 <template>
   <div class="flex gap-2 justify-end mt-4 mr-2">
     <AppButton
+      v-if="user === null"
       text="Войти"
       class="bg-white text-black"
       @click="router.push('/sign-in')"
     />
     <AppButton
+      v-if="user === null"
       text="Зарегистрироваться"
       class="border-1 border-neutral-700"
       @click="router.push('/sign-up')"
