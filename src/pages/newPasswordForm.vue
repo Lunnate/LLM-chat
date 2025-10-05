@@ -3,18 +3,21 @@ import { ref } from "vue";
 import { useAuth } from "../composables/useAuth.ts";
 import { useRouter } from "vue-router";
 
-const { resetPasswordRequest } = useAuth();
-import InputField from "../components/ui/InputField.vue";
 import ButtonForForms from "../components/ui/ButtonForForms.vue";
+import InputField from "../components/ui/InputField.vue";
 
 const router = useRouter();
-
-const email = ref<string>("");
+const { resetPassword } = useAuth();
+const password = ref<string>("");
+const repeatPassword = ref<string>("");
 
 async function handleSubmit() {
   try {
-    await resetPasswordRequest(email.value);
-    alert("Пароль был сброшен, проверьте почту");
+    if (password.value !== repeatPassword.value) {
+      alert("Пароли не совпадают");
+    }
+    await resetPassword(password.value);
+    alert("Пароль был изменен");
     router.push("/sign-in");
   } catch (error: unknown) {
     if (error instanceof Error) {
@@ -30,9 +33,14 @@ async function handleSubmit() {
       class="bg-black rounded-[20px] p-10 w-full max-w-[450px] backdrop-blur-[10px] border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.3)] animate-[fadeInUp_0.6s_ease]"
     >
       <h1 class="text-[32px] font-light mb-10 text-center text-white">
-        Восстановить пароль
+        Восстановление пароля
       </h1>
-      <input-field label="Email" type="email" v-model="email" />
+      <input-field label="Пароль" type="password" v-model="password" />
+      <input-field
+        label="Повторите пароль"
+        type="password"
+        v-model="repeatPassword"
+      />
       <button-for-forms text="Отправить" class="mb-4" @click="handleSubmit" />
       <div class="flex justify-between">
         <router-link to="/sign-in" class="text-base text-white">

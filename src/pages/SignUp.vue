@@ -1,6 +1,44 @@
 <script setup lang="ts">
 import InputField from "../components/ui/InputField.vue";
 import ButtonForForms from "../components/ui/ButtonForForms.vue";
+
+import { useAuth } from "../composables/useAuth.ts";
+import { useRouter } from "vue-router";
+import { ref } from "vue";
+
+const username = ref<string>("");
+const email = ref<string>("");
+const password = ref<string>("");
+const repeatPassword = ref<string>("");
+const { signUp } = useAuth();
+const terms = ref<boolean>(false);
+const router = useRouter();
+
+async function handleSubmit(): Promise<void> {
+  try {
+    if (password.value !== repeatPassword.value) {
+      alert("Пароли не совпадают");
+    }
+    if (
+      !username.value ||
+      !email.value ||
+      !password.value ||
+      !repeatPassword.value
+    ) {
+      alert("Поля не могут быть пустыми");
+    }
+    if (!terms.value) {
+      alert("Вы должны согласиться с условиями");
+    }
+    await signUp(email.value, password.value);
+    alert("Регистрация прошла успешно");
+    router.push("/sign-in");
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+  }
+}
 </script>
 
 <template>
@@ -11,10 +49,14 @@ import ButtonForForms from "../components/ui/ButtonForForms.vue";
       <h1 class="text-[32px] font-light mb-10 text-center text-white">
         Регистрация
       </h1>
-      <input-field label="Логин" type="text" />
-      <input-field label="Email" type="email" />
-      <input-field label="Пароль" type="password" />
-      <input-field label="Повторите пароль" type="password" />
+      <input-field label="Логин" type="text" v-model="username" />
+      <input-field label="Email" type="email" v-model="email" />
+      <input-field label="Пароль" type="password" v-model="password" />
+      <input-field
+        label="Повторите пароль"
+        type="password"
+        v-model="repeatPassword"
+      />
       <div class="flex items-start my-2.5">
         <div class="relative w-5 h-5 mt-[2px] flex-shrink-0">
           <input
@@ -22,6 +64,8 @@ import ButtonForForms from "../components/ui/ButtonForForms.vue";
             id="terms"
             required
             class="absolute opacity-0 w-full h-full cursor-pointer peer z-10"
+            @click="terms = !terms"
+            v-model="terms"
           />
           <span
             class="absolute top-[2px] left-0 w-6 h-6 bg-[#101015] border border-white/20 rounded transition-all duration-300 peer-checked:bg-neutral-900 peer-checked:border-white"
@@ -38,7 +82,11 @@ import ButtonForForms from "../components/ui/ButtonForForms.vue";
         </label>
       </div>
       <div class="flex flex-col">
-        <button-for-forms text="Зарегистрироваться" class="mb-4" />
+        <button-for-forms
+          text="Зарегистрироваться"
+          class="mb-4"
+          @click="handleSubmit()"
+        />
         <div class="flex justify-between">
           <span class="text-base text-white opacity-60">
             Уже есть аккаунт?

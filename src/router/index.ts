@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage.vue";
 import SignUp from "../pages/SignUp.vue";
 import SignIn from "../pages/SignIn.vue";
 import ResetPassword from "../pages/ResetPassword.vue";
+import NewPasswordForm from "../pages/newPasswordForm.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,12 @@ const router = createRouter({
       path: "/reset-password",
       name: "reset-password",
       component: ResetPassword,
+      meta: { hideSidebar: true },
+    },
+    {
+      path: "/new-password",
+      name: "new-password",
+      component: NewPasswordForm,
       meta: { hideSidebar: true },
     },
   ],

@@ -27,7 +27,7 @@ defineEmits(["update:modelValue", "blur"]);
     <label
       class="absolute left-5 top-[45%] -translate-y-1/2 text-base text-white/60 font-normal transition-all duration-300 ease-in-out pointer-events-none z-[1] peer-focus:top-[-12px] peer-focus:left-4 peer-focus:text-base peer-focus:text-white peer-focus:px-2 peer-focus:rounded peer-[:not(:placeholder-shown)]:top-[-12px] peer-[:not(:placeholder-shown)]:left-4 peer-[:not(:placeholder-shown)]:text-base peer-[:not(:placeholder-shown)]:text-white peer-[:not(:placeholder-shown)]:px-2 peer-[:not(:placeholder-shown)]:rounded"
     >
-      {{ label }}
+      {{ props.label }}
     </label>
   </div>
 </template>
