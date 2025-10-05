@@ -11,7 +11,7 @@ supabase.auth.getSession().then(({ data }) => {
   session.value = data.session;
 });
 
-supabase.auth.onAuthStateChange((event, newSession) => {
+supabase.auth.onAuthStateChange((_event, newSession) => {
   user.value = newSession?.user ?? null;
   session.value = newSession;
 });
@@ -19,7 +19,7 @@ supabase.auth.onAuthStateChange((event, newSession) => {
 async function signUp(email: string, password: string): Promise<void> {
   try {
     isLoading.value = true;
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: email,
       password: password,
     });
@@ -35,7 +35,7 @@ async function signUp(email: string, password: string): Promise<void> {
 async function signIn(email: string, password: string): Promise<void> {
   try {
     isLoading.value = true;
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
@@ -65,7 +65,7 @@ async function signOut(): Promise<void> {
 async function resetPasswordRequest(email: string): Promise<void> {
   try {
     isLoading.value = true;
-    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: "http://localhost:5173/new-password",
     });
     if (error) throw error;
@@ -80,7 +80,7 @@ async function resetPasswordRequest(email: string): Promise<void> {
 async function resetPassword(newPassword: string): Promise<void> {
   try {
     isLoading.value = true;
-    const { data, error } = await supabase.auth.updateUser({
+    const { error } = await supabase.auth.updateUser({
       password: newPassword,
     });
     if (error) throw error;
